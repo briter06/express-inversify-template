@@ -23,6 +23,6 @@ describe("HelloController", () => {
             () => ({})
         )
         expect(result.data).toBeDefined()
-        expect(result.data).toEqual("Hello User")
+        expect(result.data).toEqual({ greeting: "Hello User" })
     })
 })

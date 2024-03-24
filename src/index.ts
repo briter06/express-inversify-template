@@ -58,10 +58,12 @@ server.setConfig((app) => {
     app.get("/", (req, res) => res.status(200).send({ api: STATUS.SUCCESS }))
 })
 
+// Set error middleware handler
 server.setErrorConfig((app) => {
     app.use(errorFilter(loggerService))
 })
 
+// Initialize the server
 const serverApp = server.build()
 const port = environmentService.getVariables().port
 serverApp.listen(port, () => {

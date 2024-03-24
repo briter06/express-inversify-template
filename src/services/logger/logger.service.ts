@@ -7,6 +7,9 @@ import { IEnvironmentService } from "@config/env"
 import { ILoggerService } from "."
 import { provide } from "inversify-binding-decorators"
 
+/**
+ * Logger service to log every event
+ */
 @provide(TYPE.ILoggerService)
 export class LoggerService implements ILoggerService {
     private logger: Logger
@@ -20,23 +23,39 @@ export class LoggerService implements ILoggerService {
         this.logger.level = level
     }
 
+    /**
+     * Log the message with a DEBUG level
+     * @param message Message to log
+     */
     public debug(message: any) {
         this.logger.debug(message)
     }
 
+    /**
+     * Log the message with an INFO level
+     * @param message Message to log
+     */
     public info(message: any) {
         this.logger.info(message)
     }
 
+    /**
+     * Log the message with an ERROR level
+     * @param message Message to log
+     */
     public error(message: any) {
         this.logger.error(message)
     }
 
+    /**
+     * Initialize the morgan middleware
+     * @returns Morgan middleware
+     */
     public getMorganMiddleware() {
         return morgan(
             ":method :url | Status: :status | Response time: :response-time ms",
             {
-                skip: (_, res) => {
+                skip: (_req, res) => {
                     return res.statusCode !== StatusCodes.OK
                 },
                 stream: {

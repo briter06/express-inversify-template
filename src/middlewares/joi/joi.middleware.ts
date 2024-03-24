@@ -1,10 +1,15 @@
-import { JOI_ERROR } from "@enums/joiErrors.enum"
+import { JOIErrors } from "@enums/joiErrors.enum"
 import { InvalidEmailError } from "@errors/invalidEmail.error"
 import { InvalidPasswordError } from "@errors/invalidPassword.error"
 import { RequestSchemaError } from "@errors/requestScheme.error"
 import * as express from "express"
 import Joi from "joi"
 
+/**
+ * Middleware to valide joi structure in the body of the request
+ * @param joiScheme Joi scheme instance
+ * @returns New middleware function
+ */
 export const joiBodyValidator = (joiScheme: Joi.ObjectSchema) => {
     return (
         req: express.Request,
@@ -20,6 +25,11 @@ export const joiBodyValidator = (joiScheme: Joi.ObjectSchema) => {
     }
 }
 
+/**
+ * Middleware to valide joi structure in the query of the request
+ * @param joiScheme Joi scheme instance
+ * @returns New middleware function
+ */
 export const joiQueryValidator = (joiScheme: Joi.ObjectSchema) => {
     return (
         req: express.Request,
@@ -35,6 +45,11 @@ export const joiQueryValidator = (joiScheme: Joi.ObjectSchema) => {
     }
 }
 
+/**
+ * Middleware to valide joi structure in the parameters of the request
+ * @param joiScheme Joi scheme instance
+ * @returns New middleware function
+ */
 export const joiParamsValidator = (joiScheme: Joi.ObjectSchema) => {
     return (
         req: express.Request,
@@ -50,6 +65,13 @@ export const joiParamsValidator = (joiScheme: Joi.ObjectSchema) => {
     }
 }
 
+/**
+ * Process custom JOI errors
+ * @param req Request object
+ * @param error JOI error
+ * @param origin Origin of the error
+ * @returns Custom error instance
+ */
 const processCustomJoiErrors = (
     req: express.Request,
     error: Joi.ValidationError,
@@ -58,9 +80,9 @@ const processCustomJoiErrors = (
     const message = `${req.url} | ${error.message} | ${origin}`
     const valErr = `${error.details[0]?.context?.label}#${error.details[0]?.type}`
     switch (valErr) {
-        case JOI_ERROR.INVALID_EMAIL:
+        case JOIErrors.INVALID_EMAIL:
             return new InvalidEmailError(message)
-        case JOI_ERROR.INVALID_PASSWORD:
+        case JOIErrors.INVALID_PASSWORD:
             return new InvalidPasswordError(message)
         default:
             return new RequestSchemaError(message)

@@ -1,9 +1,9 @@
-import { ApiErrors } from "@enums/errors.enum"
-import { ApiError } from "./api.error"
+import { APIErrors } from "@enums/apiErrors.enum"
+import { APIError } from "./api.error"
 
-export class InvalidPasswordError extends ApiError {
+export class InvalidPasswordError extends APIError {
     constructor(msg: string) {
-        super(msg, ApiErrors.INVALID_PASSWORD, 500)
+        super(msg, APIErrors.INVALID_PASSWORD, 500)
         Object.setPrototypeOf(this, InvalidPasswordError.prototype)
     }
 }

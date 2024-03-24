@@ -1,9 +1,9 @@
-import { ApiErrors } from "@enums/errors.enum"
-import { ApiError } from "./api.error"
+import { APIErrors } from "@enums/apiErrors.enum"
+import { APIError } from "./api.error"
 
-export class RequestSchemaError extends ApiError {
+export class RequestSchemaError extends APIError {
     constructor(msg: string) {
-        super(msg, ApiErrors.REQUEST_SCHEMA_ERROR, 400)
+        super(msg, APIErrors.REQUEST_SCHEMA_ERROR, 400)
         Object.setPrototypeOf(this, RequestSchemaError.prototype)
     }
 }

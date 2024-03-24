@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import { ApiErrors } from "@enums/errors.enum"
+import { APIErrors } from "@enums/apiErrors.enum"
 import { InternalServerError } from "@errors/internalServer.error"
 import { RequestSchemaError } from "@errors/requestScheme.error"
 import { LoggerService } from "@services/logger/logger.service"
@@ -40,7 +40,7 @@ describe("Error filter tests", () => {
         )
         expect(result?.statusCode).toEqual(400)
         expect(error.getResponse().error).toEqual(
-            ApiErrors.REQUEST_SCHEMA_ERROR
+            APIErrors.REQUEST_SCHEMA_ERROR
         )
     })
 
@@ -58,7 +58,7 @@ describe("Error filter tests", () => {
         )
         expect(result?.statusCode).toEqual(500)
         expect(error.getResponse().error).toEqual(
-            ApiErrors.INTERNAL_SERVER_ERROR
+            APIErrors.INTERNAL_SERVER_ERROR
         )
     })
 
@@ -75,7 +75,7 @@ describe("Error filter tests", () => {
             () => ({})
         )
         expect(result?.statusCode).toEqual(403)
-        expect(error.getResponse().error).toEqual(ApiErrors.FORBIDDEN)
+        expect(error.getResponse().error).toEqual(APIErrors.FORBIDDEN)
     })
 
     test("GenericError", () => {
