@@ -5,9 +5,15 @@ module.exports = {
     testPathIgnorePatterns: [".d.ts", ".js", "/node_modules/", "/dist/"],
     moduleNameMapper: {
         "^~(.*)$": "<rootDir>/src$1",
-        "^@models(.*)$": "<rootDir>/src/models$1",
-        "^@parser(.*)$": "<rootDir>/src/parser$1",
+        "^@config(.*)$": "<rootDir>/src/config$1",
         "^@services(.*)$": "<rootDir>/src/services$1",
+        "^@models(.*)$": "<rootDir>/src/models$1",
+        "^@controllers(.*)$": "<rootDir>/src/controllers$1",
+        "^@middlewares(.*)$": "<rootDir>/src/middlewares$1",
+        "^@schemas(.*)$": "<rootDir>/src/schemas$1",
+        "^@enums(.*)$": "<rootDir>/src/enums$1",
+        "^@errors(.*)$": "<rootDir>/src/errors$1",
+        "^@utils(.*)$": "<rootDir>/src/utils$1"
     },
     coverageDirectory: "test/coverage",
 }
